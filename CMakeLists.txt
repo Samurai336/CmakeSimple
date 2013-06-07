@@ -41,11 +41,25 @@ include_directories(
 	${CMAKE_SOURCE_DIR}/include
 	)
 
-if(WIN32)
+if(WIN32)	
 	add_executable(${App_Name} WIN32
 	${SRCS}
 	${HDRS}
 	)
+
+	SET_TARGET_PROPERTIES(${App_Name} PROPERTIES COMPILE_FLAGS "/Od /ZI")
+	SET_TARGET_PROPERTIES(${App_Name} PROPERTIES LINK_FLAGS "/DEBUG /SUBSYSTEM:CONSOLE") #for some reason I Can't set the sub system here 
+											     # it can only be set from Visual studio :( 
+
+
+
+	#set_target_properties(${App_Name} PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:console")
+	#set_target_properties(${App_Name} PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:console")
+   	#set_target_properties(WindowApplicationExample PROPERTIES COMPILE_DEFINITIONS_DEBUG "_CONSOLE")
+  	#set_target_properties(WindowApplicationExample PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:CONSOLE")
+   	#set_target_properties(WindowApplicationExample PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_CONSOLE")
+   	#set_target_properties(WindowApplicationExample PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
+   	#set_target_properties(WindowApplicationExample PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
 else ()
 	add_executable (${App_Name}
 	${SRCS}
